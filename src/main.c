@@ -51,7 +51,7 @@ int action(int argc, char* argv[], struct option* options) {
     int opt;
     int base;
     char* endPtr;
-    int targetBases[countTargetBasis(argv[4])];
+    int targetBases[(argc == 2) ? 0 : countTargetBasis(argv[4])]; // if only -h => size = 0
     int numTargetBases = 0;
     const char *charNumber;
 
