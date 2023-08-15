@@ -1,7 +1,12 @@
 # Number-Systems-Converter-CLI
 
 ## Install
-Use the following command in your terminal:
+Just use ''make'' in your terminal:
+````bash
+$ make
+````
+
+Or do it manually by using the following command in your terminal:
 ````bash
 $ gcc -Wall -Wextra -o ns.exe main.c
 ````
