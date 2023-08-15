@@ -1,7 +1,7 @@
 # Number-Systems-Converter-CLI
 
 ## Install
-Just use ''make'' in your terminal:
+Just use ``make`` in your terminal:
 ````bash
 $ make
 ````
