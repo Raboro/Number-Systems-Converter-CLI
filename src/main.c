@@ -10,7 +10,13 @@ void printHelp() {
     printf("  -n, --number NUMBER      Number to convert\n");
 }
 
-int main() {
+int printErrorInvalidInput() {
+    fprintf(stderr, "Try 'ns --help' for more information.\n");
+    return 1;
+}
+
+int main(int argc, char* argv[]) {
+    int opt;
     static struct option options[] = {
             {"help", no_argument, 0, 'h'},
             {"input-base", required_argument, 0, 'i'},
@@ -18,6 +24,15 @@ int main() {
             {"number", required_argument, 0, 'n'},
             {0, 0, 0, 0}
     };
-    printHelp();
-    return 0;
+
+    while ((opt = getopt_long(argc, argv, "hi:t:n:", options, NULL)) != -1) {
+        switch (opt) {
+            case 'h':
+                printHelp();
+                return 0;
+            default:
+                return printErrorInvalidInput();
+        }
+    }
+    return printErrorInvalidInput();
 }

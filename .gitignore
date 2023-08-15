@@ -1,2 +1,4 @@
 /.idea/
 /cmake-build-debug/
+/src/main.exe
+/src/ns.exe
