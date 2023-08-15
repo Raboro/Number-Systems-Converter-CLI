@@ -29,6 +29,24 @@ int countTargetBasis(const char *str) {
     return count;
 }
 
+int toDezSmallerTen(int number, int base) {
+    int decimalNumber = 0;
+    int position = -1;
+    while (number > 0) {
+        decimalNumber += (number % 10) * pow(base, ++position);
+        number /= 10;
+    }
+    return decimalNumber;
+}
+
+int toDezGreaterNine() {
+    return 0;
+}
+
+int toDez(int number, int base) {
+    return (base <= 9) ? toDezSmallerTen(number, base) : toDezGreaterNine();
+}
+
 int action(int argc, char* argv[], struct option* options) {
     int opt;
     int base;
