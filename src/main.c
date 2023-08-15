@@ -15,8 +15,19 @@ int printErrorInvalidInput() {
     return 1;
 }
 
-int main(int argc, char* argv[]) {
+int action(int argc, char* argv[], struct option* options) {
     int opt;
+    while ((opt = getopt_long(argc, argv, "hi:t:n:", options, NULL)) != -1) {
+        switch (opt) {
+            case 'h':
+                printHelp();
+                return 0;
+        }
+    }
+    return printErrorInvalidInput();
+}
+
+int main(int argc, char* argv[]) {
     static struct option options[] = {
             {"help", no_argument, 0, 'h'},
             {"input-base", required_argument, 0, 'i'},
@@ -24,15 +35,5 @@ int main(int argc, char* argv[]) {
             {"number", required_argument, 0, 'n'},
             {0, 0, 0, 0}
     };
-
-    while ((opt = getopt_long(argc, argv, "hi:t:n:", options, NULL)) != -1) {
-        switch (opt) {
-            case 'h':
-                printHelp();
-                return 0;
-            default:
-                return printErrorInvalidInput();
-        }
-    }
-    return printErrorInvalidInput();
+    return action(argc, argv, options);
 }
