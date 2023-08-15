@@ -29,17 +29,13 @@ int countTargetBasis(const char *str) {
     return count;
 }
 
-double toDezSmallerTen(const char *number, int base) {
+double toDez(const char *number, int base) {
     double decimalNumber = 0.0;
     int position = -1;
     for (int i = strlen(number) - 1; i >= 0; i--) {
         decimalNumber += (number[i] - '0') * pow(base, ++position);
     }
     return decimalNumber;
-}
-
-int toDezGreaterNine(char* number, int base) {
-    return 0;
 }
 
 int action(int argc, char* argv[], struct option* options) {
@@ -85,7 +81,6 @@ int action(int argc, char* argv[], struct option* options) {
         fprintf(stderr, "Missing required arguments.\n");
         return 1;
     }
-    printf("%f", (base <= 10) ? toDezSmallerTen(charNumber, base) : toDezGreaterNine(charNumber, base));
     return 0;
 }
 
