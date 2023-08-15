@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <getopt.h>
 
 void printHelp() {
     printf("Usage: ns [OPTIONS] [SOURCE_BASE] [TARGET_BASES] [NUMBER]\n");
@@ -10,6 +11,13 @@ void printHelp() {
 }
 
 int main() {
+    static struct option options[] = {
+            {"help", no_argument, 0, 'h'},
+            {"input-base", required_argument, 0, 'i'},
+            {"target-bases", required_argument, 0, 't'},
+            {"number", required_argument, 0, 'n'},
+            {0, 0, 0, 0}
+    };
     printHelp();
     return 0;
 }
