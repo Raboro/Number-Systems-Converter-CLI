@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
+
 
 void printHelp() {
     printf("Usage: ns [OPTIONS] [SOURCE_BASE] [TARGET_BASES] [NUMBER]\n");
@@ -41,6 +43,15 @@ double toDez(const char *number, int base) {
     }
 
     return decimalNumber;
+}
+
+bool containsCharacter(const char *array) {
+    for (int i = 0; array[i] != '\0'; i++) {
+        if (array[i] == '.') {
+            return true;
+        }
+    }
+    return false;
 }
 
 void toTargetBase(double dez, int targetBase, char symbol) {
@@ -87,7 +98,7 @@ void toTargetBase(double dez, int targetBase, char symbol) {
         result[length] = '\0';
     }
 
-    printf("Number %f into base %d => %c%s\n", dez, targetBase, symbol, result);
+    printf("into base %d => %c%s\n", targetBase, symbol, result);
     free(result);
 }
 
@@ -138,7 +149,17 @@ int action(int argc, char* argv[], struct option* options) {
         fprintf(stderr, "Missing required arguments.\n");
         return 1;
     }
-    toTargetBase(toDez(charNumber, base), targetBases[0], symbol);
+
+    if (!containsCharacter(charNumber)) {
+        fprintf(stderr, "Missing '.' => please do: number.\n");
+        return 1;
+    }
+
+    const double dez = toDez(charNumber, base);
+    printf("Input number %f converted:\n", strtod(charNumber, NULL));
+    for (int i = 0; i < numTargetBases; i++) {
+        toTargetBase(dez, targetBases[i], symbol);
+    }
     return 0;
 }
 
