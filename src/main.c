@@ -16,8 +16,8 @@ void printHelp() {
     printf("  -m, --minus              If present then - else +");
 }
 
-int printErrorInvalidInput() {
-    fprintf(stderr, "Try 'ns --help' for more information.\n");
+int printError(char error[]) {
+    fprintf(stderr, "%s", error);
     return 1;
 }
 
@@ -119,8 +119,7 @@ int action(int argc, char* argv[], struct option* options) {
             case 'i':
                 base = strtol(optarg, &endPtr, 10);
                 if (*endPtr != '\0') {
-                    fprintf(stderr, "Invalid source base.\n");
-                    return 1;
+                    return printError("Invalid source base.");
                 }
                 break;
             case 't': {
@@ -128,8 +127,7 @@ int action(int argc, char* argv[], struct option* options) {
                 while (targetBaseToken != NULL) {
                     targetBases[numTargetBases++] = strtol(targetBaseToken, &endPtr, 10);
                     if (*endPtr != '\0') {
-                        fprintf(stderr, "Invalid target base.\n");
-                        return 1;
+                        return printError("Invalid target base.");
                     }
                     targetBaseToken = strtok(NULL, ",");
                 }
@@ -142,17 +140,14 @@ int action(int argc, char* argv[], struct option* options) {
                 symbol = '-';
                 break;
             default:
-                printErrorInvalidInput();
+                return printError("Try 'ns --help' for more information");
         }
     }
     if (base == 0 || numTargetBases == 0 || isnan(strtod(charNumber, NULL))) {
-        fprintf(stderr, "Missing required arguments.\n");
-        return 1;
+        return printError("Invalid input.");
     }
-
     if (!containsCharacter(charNumber)) {
-        fprintf(stderr, "Missing '.' => please do: number.\n");
-        return 1;
+        return printError("Missing '.' => please do: number.");
     }
 
     const double dez = toDez(charNumber, base);
