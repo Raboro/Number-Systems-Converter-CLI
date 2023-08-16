@@ -31,10 +31,14 @@ int countTargetBasis(const char *str) {
 
 double toDez(const char *number, int base) {
     double decimalNumber = 0.0;
-    int position = -1;
-    for (int i = strlen(number) - 1; i >= 0; i--) {
-        decimalNumber += (number[i] - '0') * pow(base, ++position);
+    int dotPosition = strchr(number, '.') - number;
+
+    for (int i = 0; i < strlen(number); i++) {
+        if (number[i] == '.') continue;
+        int digit = (number[i] >= 'A') ? number[i] - 'A' + 10 : number[i] - '0';
+        decimalNumber += digit * pow(base, (dotPosition < i) ? dotPosition - i : dotPosition - i - 1);
     }
+
     return decimalNumber;
 }
 
@@ -81,6 +85,7 @@ int action(int argc, char* argv[], struct option* options) {
         fprintf(stderr, "Missing required arguments.\n");
         return 1;
     }
+    const double dez = toDez(charNumber, base);
     return 0;
 }
 
