@@ -11,6 +11,7 @@ void printHelp() {
     printf("  -i, --input-base BASE    Source number base\n");
     printf("  -t, --target-bases BASES Space-separated list of target bases\n");
     printf("  -n, --number NUMBER      Number to convert\n");
+    printf("  -m, --minus              If present then - else +");
 }
 
 int printErrorInvalidInput() {
@@ -49,8 +50,9 @@ int action(int argc, char* argv[], struct option* options) {
     int targetBases[(argc == 2) ? 0 : countTargetBasis(argv[4])]; // if only -h => size = 0
     int numTargetBases = 0;
     const char *charNumber;
+    int multiplier = 1;
 
-    while ((opt = getopt_long(argc, argv, "hi:t:n:", options, NULL)) != -1) {
+    while ((opt = getopt_long(argc, argv, "hi:t:n:m", options, NULL)) != -1) {
         switch (opt) {
             case 'h':
                 printHelp();
@@ -77,6 +79,9 @@ int action(int argc, char* argv[], struct option* options) {
             case 'n':
                 charNumber = optarg;
                 break;
+            case 'm':
+                multiplier = -1;
+                break;
             default:
                 printErrorInvalidInput();
         }
@@ -85,7 +90,8 @@ int action(int argc, char* argv[], struct option* options) {
         fprintf(stderr, "Missing required arguments.\n");
         return 1;
     }
-    const double dez = toDez(charNumber, base);
+    const double dez = toDez(charNumber, base) * multiplier;
+    printf("%f", dez);
     return 0;
 }
 
@@ -95,6 +101,7 @@ int main(int argc, char* argv[]) {
             {"input-base", required_argument, 0, 'i'},
             {"target-bases", required_argument, 0, 't'},
             {"number", required_argument, 0, 'n'},
+            {"minus", no_argument, 0, 'm'},
             {0, 0, 0, 0}
     };
     return action(argc, argv, options);
