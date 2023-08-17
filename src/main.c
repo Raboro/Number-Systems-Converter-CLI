@@ -13,7 +13,7 @@ void printHelp() {
     printf("Options:\n");
     printf("  -h, --help               Display this help message\n");
     printf("  -i, --input-base BASE    Source number base\n");
-    printf("  -t, --target-bases BASES Space-separated list of target bases\n");
+    printf("  -t, --target-bases BASES Comma-separated list of target bases\n");
     printf("  -n, --number NUMBER      Number to convert\n");
     printf("  -m, --minus              If present then - else +");
 }

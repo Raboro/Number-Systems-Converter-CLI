@@ -61,7 +61,7 @@ $ ns -h
   Options:
     -h, --help               Display this help message
     -i, --input-base BASE    Source number base
-    -t, --target-bases BASES Space-separated list of target bases
+    -t, --target-bases BASES Comma-separated list of target bases
     -n, --number NUMBER      Number to convert
     -m, --minus              If present then - else +
 ````
