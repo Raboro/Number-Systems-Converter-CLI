@@ -7,7 +7,9 @@
 
 
 void printHelp() {
-    printf("Usage: ns [OPTIONS] [SOURCE_BASE] [TARGET_BASES] [NUMBER]\n");
+    printf("Usage:\n  ns -h\n");
+    printf("  ns -i [SOURCE_BASE] -t [TARGET_BASES] -n [NUMBER]\n");
+    printf("  ns -i [SOURCE_BASE] -t [TARGET_BASES] -n [NUMBER] -m\n");
     printf("Options:\n");
     printf("  -h, --help               Display this help message\n");
     printf("  -i, --input-base BASE    Source number base\n");
