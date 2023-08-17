@@ -1,7 +1,7 @@
 # Number-Systems-Converter-CLI
 
 ## Install
-Just use ``make`` in your terminal:
+After cloning the repo and ``cd`` into the project, just use ``make`` in your terminal:
 ````bash
 $ make
 ````
