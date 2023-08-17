@@ -87,8 +87,7 @@ void toTargetBase(double dez, int targetBase, char symbol) {
     if (fracPart > 0) {
         result = (char *) realloc(result, length + 8);  // +1 for '.', +6 for decimal places, +1 for null terminator
         if (result == NULL) {
-            perror("Memory allocation failed");
-            exit(1);
+            printError("Memory allocation failed");
         }
         result[length++] = '.';
         for (int i = 0; i < 6; i++) {  // Convert up to 6 decimal places
