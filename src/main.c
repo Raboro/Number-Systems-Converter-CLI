@@ -47,13 +47,13 @@ double toDez(const char *number, int base) {
     return decimalNumber;
 }
 
-bool containsCharacter(const char *array) {
+bool noComma(const char *array) {
     for (int i = 0; array[i] != '\0'; i++) {
         if (array[i] == '.') {
-            return true;
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 void toTargetBase(double dez, int targetBase, char symbol) {
@@ -148,7 +148,7 @@ int action(int argc, char* argv[], struct option* options) {
     if (base == 0 || numTargetBases == 0 || isnan(strtod(charNumber, NULL))) {
         return printError("Invalid input.");
     }
-    if (!containsCharacter(charNumber)) {
+    if (noComma(charNumber)) {
         return printError("Missing '.' => please do: number.");
     }
 
