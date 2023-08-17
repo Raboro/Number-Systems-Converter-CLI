@@ -145,7 +145,8 @@ int action(int argc, char* argv[], struct option* options) {
                 return printError("Try 'ns --help' for more information");
         }
     }
-    if (base == 0 || numTargetBases == 0 || isnan(strtod(charNumber, NULL))) {
+    const double number = strtod(charNumber, NULL);
+    if (base == 0 || numTargetBases == 0 || isnan(number)) {
         return printError("Invalid input.");
     }
     if (noComma(charNumber)) {
@@ -153,7 +154,7 @@ int action(int argc, char* argv[], struct option* options) {
     }
 
     const double dez = toDez(charNumber, base);
-    printf("Input number %f converted:\n", strtod(charNumber, NULL));
+    printf("Input number %f converted:\n", number);
     for (int i = 0; i < numTargetBases; i++) {
         toTargetBase(dez, targetBases[i], symbol);
     }
